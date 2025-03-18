@@ -1,6 +1,5 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-Tämä on harjoitustyö ohjelmistotekniikan kurssi. Olen tekemässä viikon 1 komentonrivin harjoittelua ja versionhallinta.
+Olen valinnut ***Henkilökohtainen taloudenhallinta sovellus*** harjoitustyöni aiheeksi. 
 
-## Tehtävät
 [laskarit](./laskarit)
