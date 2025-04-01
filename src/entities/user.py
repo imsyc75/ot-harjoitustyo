@@ -1,4 +1,4 @@
-from database_connection import get_db_connection
+from src.database_connection import get_db_connection
 import sqlite3
 
 class User:
@@ -16,7 +16,8 @@ class User:
         except sqlite3.IntegrityError:
             return False 
         finally:
-            conn.close()
+            if conn:
+               conn.close()
 
     def find_by_username(self):
         conn = get_db_connection()
