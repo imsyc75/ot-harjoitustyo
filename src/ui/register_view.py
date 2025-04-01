@@ -28,8 +28,9 @@ class RegisterView(tk.Toplevel):
         if not username or not password:
             messagebox.showerror("Error", "Username and password cannot be empty!")
             return
-    
-        if User.create(username, password):
+        
+        user_obj = User(username, password)
+        if user_obj.create():
             messagebox.showinfo("Success", f"User {username} registered!")
             self.destroy()
         else:

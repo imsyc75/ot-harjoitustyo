@@ -32,9 +32,8 @@ def create_tables(conn):
     conn.commit()
  
 def initialize_database():
-    conn = None
+    conn = get_db_connection()
     try:
-        conn = get_db_connection()
         drop_tables(conn)
         create_tables(conn)
         print("Database tables created successfully")
