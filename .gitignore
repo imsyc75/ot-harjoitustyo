@@ -1,5 +1,14 @@
-.pytest_cache
-__pycache__
-.coverage
-htmlcov
+.vscode
 .DS_Store
+.coverage
+.pytest_cache
+htmlcov
+__pycache__
+*.py[cod]
+*$py.class
+
+# Database and local data files
+/data/
+*.db
+*.sqlite
+*.csv
