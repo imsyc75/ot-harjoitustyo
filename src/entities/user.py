@@ -1,4 +1,4 @@
-from src.database_connection import get_db_connection
+from database_connection import get_db_connection
 import sqlite3
 
 class User:
