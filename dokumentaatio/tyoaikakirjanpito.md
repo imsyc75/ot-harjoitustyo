@@ -8,10 +8,10 @@ viikko2
 | yht   | 2  | | 
 
 
-viikko2
+viikko3
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
-| 28.2. | 1    | projektin alustaminen  |
-| 31.1 | 6   | Toiminnallisuuden toteutus |
+| 28.3. | 1    | projektin alustaminen  |
+| 31.3 | 6   | Toiminnallisuuden toteutus |
 | 1.4 | 5   | Muuta |
-| yht   | 11  | | 
+| yht   | 12  | | 
