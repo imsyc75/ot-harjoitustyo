@@ -23,8 +23,8 @@ def create_tables(conn):
         user_id INTEGER NOT NULL,
         amount REAL NOT NULL,
         category TEXT NOT NULL,
-        description TEXT,
         date TEXT NOT NULL,
+        description TEXT,
         FOREIGN KEY (user_id) REFERENCES users (id)
     )
     """)

@@ -1,5 +1,6 @@
 import tkinter as tk
 from ui.login_view import LoginView
+from ui.expenses_view import ExpensesView
 
 class MoneyTrackApp(tk.Tk):
     def __init__(self):
@@ -12,7 +13,7 @@ class MoneyTrackApp(tk.Tk):
 
     def on_login_success(self, username):
         print(f"User {username} logged in!")
-        self.deiconify()  # Display the main window (to be implemented)
+        ExpensesView(self, username)
 
 if __name__ == "__main__":
     app = MoneyTrackApp()
