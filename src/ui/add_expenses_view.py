@@ -4,10 +4,18 @@ from entities.expenses import Expense
 import datetime
 
 class AddExpenseView(tk.Toplevel):
-    def __init__(self, parent, user_id):
+    def __init__(self, parent, user_id, expense_data=None):
         super().__init__(parent)
         self.title("MoneyTrack - Add New Expense")
         self.user_id = user_id
+        self.expense_data = expense_data
+
+        if expense_data:
+            self.title("MoneyTrack - Edit Expense")
+            self.expense_id = expense_data["id"]
+        else:
+            self.title("MoneyTrack - Add New Expense")
+            self.expense_id = None
 
         tk.Label(self, text="Amount ($):").grid(row=0, column=0, padx=10, pady=5, sticky=tk.W)
         self.amount_entry = tk.Entry(self)
@@ -80,8 +88,16 @@ class AddExpenseView(tk.Toplevel):
             description=description
         )
 
-        if expense.create():
-            messagebox.showinfo("Success", "Expense saved successfully!")
+        success = False
+        if self.expense_id:
+            success = expense.update(self.expense_id)
+            message = "Expense updated successfully!"
+        else:
+            success = expense.create()
+            message = "Expense saved successfully!"
+            
+        if success:
+            messagebox.showinfo("Success", message)
             self.destroy()
         else:
             messagebox.showerror("Error", "Failed to save expense. Please try again.")
