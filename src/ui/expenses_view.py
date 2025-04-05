@@ -1,22 +1,29 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from entities.expenses import Expense
+from ui.add_expenses_view import AddExpenseView
 
 class ExpensesView(tk.Toplevel):
     def __init__(self, parent, user_id):
         super().__init__(parent)
-        self.title(f"{user_id}'s Expenses")
+        self.title(f"MoneyTrack - Expenses")
         self.user_id = user_id
+        
+        button_frame = tk.Frame(self)
+        button_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        add_button = tk.Button(button_frame, text="Add New Expense", command=self.open_add_expense)
+        add_button.pack(side=tk.LEFT, padx=5, pady=5)
         
         self.expenses_frame = tk.Frame(self)
         self.expenses_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        self.expenses_tree = ttk.Treeview(self.expenses_frame, columns=("Date", "Amount","Category", "Description"), show="headings")
+        self.expenses_tree = ttk.Treeview(self.expenses_frame, columns=("Amount", "Category", "Date", "Description"), show="headings")
         self.expenses_tree.heading("Amount", text="Amount")
         self.expenses_tree.heading("Category", text="Category")
         self.expenses_tree.heading("Date", text="Date")
         self.expenses_tree.heading("Description", text="Description")
-        
+
         self.expenses_tree.column("Amount", width=100)
         self.expenses_tree.column("Category", width=150)
         self.expenses_tree.column("Date", width=100)
@@ -44,15 +51,21 @@ class ExpensesView(tk.Toplevel):
             message_label = tk.Label(self.expenses_frame, text="You don't have any expenses yet", font=("Arial", 14))
             message_label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         else:
-            # generoitu koodi alkaa 
+            # generoitu koodi alkaa
             for widget in self.expenses_frame.winfo_children():
                 if isinstance(widget, tk.Label) and widget.cget("text") == "You don't have any expenses yet":
                     widget.destroy()
             # generoitu koodi päättyy
+
             for expense in expenses:
                 self.expenses_tree.insert("", tk.END, values=(
                     f"${expense['amount']:.2f}",
-                    expense["date"],
                     expense["category"],
+                    expense["date"],
                     expense["description"]
                 ))
+    
+    def open_add_expense(self):
+        add_view = AddExpenseView(self, self.user_id)
+        self.wait_window(add_view)
+        self.load_expenses()

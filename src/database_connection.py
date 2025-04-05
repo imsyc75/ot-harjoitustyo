@@ -1,4 +1,3 @@
-# database_connection.py
 import sqlite3
 from config import DATABASE_FILE_PATH
 

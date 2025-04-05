@@ -18,6 +18,7 @@ class Expense:
                 VALUES (?, ?, ?, ?, ?)""",
                 (self.user_id, self.amount, self.category, self.date, self.description)
             )
+            conn.commit()
             return True
         except sqlite3.IntegrityError:
             return False 
