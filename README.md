@@ -41,3 +41,8 @@ Testikattavuusraportti
 ```bash
 poetry run invoke coverage-report
 ```
+
+[.pylintrc](./.pylintrc) määrittelemät tarkistukset:
+```bash
+poetry run invoke lint
+```
