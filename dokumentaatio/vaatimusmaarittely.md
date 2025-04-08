@@ -9,19 +9,19 @@ Aluksi sovelluksessa on vain tavallisia käyttäjiä, ja myöhemmin voidaan lis�
 ## Perusversion tarjoama toiminnallisuus
 
 ### Ennen kirjautumista
-- Käyttäjä voi rekisteröityä.
+- Käyttäjä voi rekisteröityä.(tehty)
     - Käyttäjätunnuksen täytyy olla unikki.
     - Salasanan täytyy sisältää välimerkkejä ja pituuddeltaan vähintään 8 merkkiä. 
-- Käyttä voi kirjautua sovellukseen.
+- Käyttä voi kirjautua sovellukseen.(tehty)
     - Kirjautuminen onnistuu, kun käyttäjätunnus ja salasana on syötetty oikein.
     - Jos käyttäjätunnus ei ole olemassa tai salasana ei täsmää, näytetään virheviesti.
     
 ### Kirjautumisen jälkeen
-- Käyttäjä voi luoda uusi meno.
+- Käyttäjä voi luoda uusi meno.(tehty)
     - päivämäärä/kategoria/summa/kuvaus
     - Kolme ensimmäistä kohdetta ovat tyhjiä tai päivämäärä on väärä, sitä ei voi luoda.
-- Käyttäjä voi tarkastella olemassa olevia menoja.
-- Käyttäjä voi muokkaa ja poista menoja.
+- Käyttäjä voi tarkastella olemassa olevia menoja.(tehty)
+- Käyttäjä voi muokkaa ja poista menoja.(tehty)
 
 ## Jatkokehitysideoita
 - Käyttäjä voi luoda uusi tulo.
