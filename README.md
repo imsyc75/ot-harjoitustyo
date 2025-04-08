@@ -6,6 +6,7 @@ MoneyTrackApp antaa käyttäjille mahdollisuuden tallentaa päivittäiset kulutu
 - [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](./dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
+- [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 1. Kloonaa koneellesi ja asenna riippuvuudet komennolla
