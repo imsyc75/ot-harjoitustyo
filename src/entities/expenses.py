@@ -1,9 +1,9 @@
-from database_connection import get_db_connection
 import sqlite3
+from database_connection import get_db_connection
 
 class Expense:
-    def __init__(self, user_id, amount=None, category=None, description=None, date=None, id=None):
-        self.id = id
+    def __init__(self, user_id, amount=None, category=None, description=None, date=None, expense_id=None):
+        self.expense_id = expense_id
         self.user_id = user_id
         self.amount = amount
         self.category = category
@@ -21,10 +21,10 @@ class Expense:
             conn.commit()
             return True
         except sqlite3.IntegrityError:
-            return False 
+            return False
         finally:
             if conn:
-               conn.close()
+                conn.close()
 
     def get_all_for_user(self):
         conn = get_db_connection()
@@ -33,7 +33,7 @@ class Expense:
                 """SELECT id, amount, category, date, description 
                 FROM expenses 
                 WHERE user_id = ? 
-                ORDER BY date DESC""", 
+                ORDER BY date DESC""",
                 (self.user_id,)
             ).fetchall()
             return expenses
@@ -57,7 +57,7 @@ class Expense:
         finally:
             if conn:
                 conn.close()
-                
+
     def get_by_id(self, expense_id):
         conn = get_db_connection()
         try:
@@ -71,8 +71,8 @@ class Expense:
             return None
         finally:
             if conn:
-                conn.close()
-                
+                conn.close()        
+    
     def update(self, expense_id):
         conn = get_db_connection()
         try:

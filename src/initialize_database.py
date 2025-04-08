@@ -8,7 +8,7 @@ def drop_tables(conn):
 
 def create_tables(conn):
     cursor = conn.cursor()
-    # generoitu koodi alkaa 
+    # generoitu koodi alkaa
     cursor.execute("""
     CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -16,7 +16,6 @@ def create_tables(conn):
         password TEXT NOT NULL
     )
     """)
-    
     cursor.execute("""
     CREATE TABLE expenses (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,18 +29,14 @@ def create_tables(conn):
     """)
     # generoitu koodi päättyy
     conn.commit()
- 
+
 def initialize_database():
     conn = get_db_connection()
-    try:
-        drop_tables(conn)
-        create_tables(conn)
-        print("Database tables created successfully")
-    except Exception as e:
-        print(f"Error initializing database: {e}")
-    finally: 
-        if conn:
-            conn.close()
+    drop_tables(conn)
+    create_tables(conn)
+    print("Database tables created successfully")
+    if conn:
+        conn.close()
 
 if __name__ == "__main__":
     initialize_database()
