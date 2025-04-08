@@ -24,3 +24,4 @@ class User:
         user = conn.execute("SELECT * FROM users WHERE username = ?", (self.username,)).fetchone()
         conn.close()
         return user
+    
