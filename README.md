@@ -47,4 +47,4 @@ poetry run invoke coverage-report
 poetry run invoke lint
 ```
 
-[__ylimääräinen koodikatselmointi__]([https://github.com/neakovalainen/ohjelmistotekniikka25/issues/1])
+[__ylimääräinen koodikatselmointi__](https://github.com/neakovalainen/ohjelmistotekniikka25/issues/1)
