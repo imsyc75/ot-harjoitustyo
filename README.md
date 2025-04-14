@@ -46,3 +46,5 @@ poetry run invoke coverage-report
 ```bash
 poetry run invoke lint
 ```
+
+[__ylimääräinen koodikatselmointi__]([https://github.com/JuhoTurunen/chess-app/issues/1](https://github.com/neakovalainen/ohjelmistotekniikka25/issues/1))
