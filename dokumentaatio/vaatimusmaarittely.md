@@ -25,7 +25,7 @@ Aluksi sovelluksessa on vain tavallisia käyttäjiä, ja myöhemmin voidaan lis�
 
 ## Jatkokehitysideoita
 - Käyttäjä voi luoda uusi tulo.
-- Käyttäjä voi luoda yhteenveto kuluista ja tuloista aikajaksoittain (päivä/viikko/kuukausi)
+- Käyttäjä voi luoda yhteenveto kuluista kuukausittain. (tehty)
 - Käyttäjä voi tarkastella kuluja kategorian ja päivämäärän mukaan
 - Käyttäjä voi luoda piirakkakaavio kuluista
 

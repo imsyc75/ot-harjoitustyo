@@ -1,5 +1,5 @@
 # Työaikakirjanpito
-Yhteensä 24h
+Yhteensä 32h
 
 viikko2
 | päivä | aika | mitä tein  |
@@ -25,5 +25,13 @@ viikko4
 | 7.4 | 2   | uusi toiminnallisuuden testaus |
 | 8.4 | 2   | pylint ja arkkitehtuuri.md kirjoittaminen |
 | yht   | 10  | | 
+
+viikko4
+| päivä | aika | mitä tein  |
+| :----:|:-----| :-----|
+| 10.4 | 2    | uusi toiminnallisuuden toteutus  |
+| 13.4 | 3   | testaus ja ylimääräinen koodikatselmointi |
+| 15.4 | 3   | logout toteutus, ui sunnittelu ja muut |
+| yht   | 8  | | 
 
 
