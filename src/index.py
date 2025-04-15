@@ -13,6 +13,12 @@ class MoneyTrackApp(tk.Tk):
         self.show_login()
 
     def show_login(self):
+        if self.login_window and self.login_window.winfo_exists():
+            self.login_window.destroy()
+
+        if self.expenses_window and self.expenses_window.winfo_exists():
+            self.expenses_window.destroy()
+
         self.login_window = LoginView(self, on_login_success=self.on_login_success)
         self.login_window.protocol("WM_DELETE_WINDOW", self.on_login_close)
 
@@ -22,15 +28,17 @@ class MoneyTrackApp(tk.Tk):
 
     def on_login_success(self, username):
         print(f"User {username} logged in!")
-        self.login_window.destroy()
-        
+        if self.login_window and self.login_window.winfo_exists():
+            self.login_window.destroy()
         self.expenses_window = ExpensesView(self, username)
         self.expenses_window.protocol("WM_DELETE_WINDOW", self.on_expenses_close)
 
     def on_expenses_close(self):
-        self.expenses_window.destroy()
-        self.destroy() 
+        if self.expenses_window and self.expenses_window.winfo_exists():
+            self.expenses_window.destroy()
+        self.destroy()
 
 if __name__ == "__main__":
     app = MoneyTrackApp()
     app.mainloop()
+    

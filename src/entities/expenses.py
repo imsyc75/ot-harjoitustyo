@@ -48,7 +48,7 @@ class Expense:
         """Get expenses within a specified date range
         Args:
             start_date (str): YYYY-MM-DD
-            end_date (str): YYYY-MM-DD       
+            end_date (str): YYYY-MM-DD
         Returns:
             list: the list of expenses
         """
@@ -67,7 +67,7 @@ class Expense:
         finally:
             if conn:
                 conn.close()
-                
+
     def get_monthly_total(self, year, month):
         """Get expenses within a specified month
         Args:
@@ -76,17 +76,17 @@ class Expense:
         Returns:
             float: the total expenses amout
         """
-        start_date = f"{year}-{month:02d}-01"  
-             
+        start_date = f"{year}-{month:02d}-01"
+
         if month == 12:
             next_month = 1
             next_year = year + 1
         else:
             next_month = month + 1
             next_year = year
-            
+
         end_date = f"{next_year}-{next_month:02d}-01"
-        
+
         conn = get_db_connection()
         try:
             result = conn.execute(
@@ -95,7 +95,7 @@ class Expense:
                 WHERE user_id = ? AND date >= ? AND date < ?""",
                 (self.user_id, start_date, end_date)
             ).fetchone()
-            
+
             return result['total'] if result['total'] else 0.0
         except sqlite3.Error:
             return 0.0
