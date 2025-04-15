@@ -3,7 +3,7 @@ import datetime
 from tkinter import ttk, messagebox
 from entities.expenses import Expense
 from ui.add_expenses_view import AddExpenseView
-
+from ui.style import Style
 
 class ExpensesView(tk.Toplevel):
     def __init__(self, parent, user_id):
@@ -11,6 +11,8 @@ class ExpensesView(tk.Toplevel):
         self.title("MoneyTrack - Expenses")
         self.user_id = user_id
         self.parent = parent
+
+        Style.apply_style(self)
 
         top_frame = tk.Frame(self)
         top_frame.pack(fill=tk.X, padx=10, pady=5)
