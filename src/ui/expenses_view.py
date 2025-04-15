@@ -1,17 +1,43 @@
 import tkinter as tk
+import datetime
 from tkinter import ttk, messagebox
 from entities.expenses import Expense
 from ui.add_expenses_view import AddExpenseView
 
+
 class ExpensesView(tk.Toplevel):
     def __init__(self, parent, user_id):
         super().__init__(parent)
-        self.title(f"MoneyTrack - Expenses")
+        self.title("MoneyTrack - Expenses")
         self.user_id = user_id
+
+        top_frame = tk.Frame(self)
+        top_frame.pack(fill=tk.X, padx=10, pady=5)
+       
+        self.current_date = datetime.date.today()
+        self.current_month = self.current_date.month
+        self.current_year = self.current_date.year
+       
+        tk.Label(top_frame, text="choose the month:").pack(side=tk.LEFT, padx=5, pady=5)
+        self.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                       "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+        self.month_var = tk.StringVar()
+        self.month_combobox = ttk.Combobox(top_frame, textvariable=self.month_var, 
+                                           values=self.months, width=5)
+        self.month_combobox.pack(side=tk.LEFT, padx=5, pady=5)
+        self.month_combobox.current(self.current_month - 1)  # set to current month
         
+        tk.Label(top_frame, text="year:").pack(side=tk.LEFT, padx=5, pady=5)
+        self.year_var = tk.StringVar(value=str(self.current_year))
+        self.year_entry = tk.Entry(top_frame, textvariable=self.year_var, width=6)
+        self.year_entry.pack(side=tk.LEFT, padx=5, pady=5)
+        
+        search_button = tk.Button(top_frame, text="Serch", command=self.filter_expenses)
+        search_button.pack(side=tk.LEFT, padx=10, pady=5)
+
         button_frame = tk.Frame(self)
         button_frame.pack(fill=tk.X, padx=10, pady=5)
-        
+       
         add_button = tk.Button(button_frame, text="Add New Expense", command=self.open_add_expense)
         add_button.pack(side=tk.LEFT, padx=5, pady=5)
         
@@ -46,18 +72,54 @@ class ExpensesView(tk.Toplevel):
         delete_button = tk.Button(action_frame, text="Delete Selected", command=self.delete_selected_expense)
         delete_button.pack(side=tk.LEFT, padx=5, pady=5)
 
+        self.summary_frame = tk.Frame(self)
+        self.summary_frame.pack(fill=tk.X, padx=10, pady=10)
+        
+        self.total_label = tk.Label(self.summary_frame, text="This month you spend: $0.00", 
+                                   font=("Arial", 14, "bold"))
+        self.total_label.pack(side=tk.RIGHT, padx=15, pady=5)
+
         self.load_expenses()
 
         self.geometry("700x600")
         self.resizable(True, True)
-    
+
+    def filter_expenses(self):
+        try:
+            selected_month = self.month_combobox.current() + 1
+            selected_year = int(self.year_var.get())
+
+            if selected_year < 1900 or selected_year > 2100:
+                messagebox.showerror("Wrong", "Please enter year between 1900-2100")
+                return
+                                    
+            self.current_month = selected_month
+            self.current_year = selected_year
+            self.load_expenses()
+
+        except ValueError:
+            messagebox.showerror("Wrong", "Please enter valid year!")
+
     def load_expenses(self):
         for item in self.expenses_tree.get_children():
             self.expenses_tree.delete(item)
         
+        start_date = f"{self.current_year}-{self.current_month:02d}-01"
+
+        if self.current_month == 12:
+            next_month = 1
+            next_year = self.current_year + 1
+        else:
+            next_month = self.current_month + 1
+            next_year = self.current_year
+            
+        end_date = f"{next_year}-{next_month:02d}-01"
+
         expense_obj = Expense(user_id=self.user_id)
-        expenses = expense_obj.get_all_for_user()
+        expenses = expense_obj.get_expenses_by_date_range(start_date, end_date)
         
+        total_expenses = 0.0
+
         if not expenses:
             message_label = tk.Label(self.expenses_frame, text="You don't have any expenses yet", font=("Arial", 14))
             message_label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
@@ -76,7 +138,9 @@ class ExpensesView(tk.Toplevel):
                     expense["date"],
                     expense["description"]
                 ))
-    
+                total_expenses += expense["amount"]
+            self.total_label.config(text=f"This month you spend: ${total_expenses:.2f}")
+
     def open_add_expense(self):
         add_view = AddExpenseView(self, self.user_id)
         self.wait_window(add_view)
@@ -125,3 +189,4 @@ class ExpensesView(tk.Toplevel):
         edit_view = AddExpenseView(self, self.user_id, expense_data)
         self.wait_window(edit_view)
         self.load_expenses()
+        
