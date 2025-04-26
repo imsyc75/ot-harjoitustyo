@@ -5,7 +5,23 @@ import datetime
 from ui.style import Style
 
 class AddExpenseView(tk.Toplevel):
+    """Luokka, joka vastaa kulun lisäämisen tai muokkaamisen näkymästä.
+    
+    Attributes:
+        user_id: Käyttäjän yksilöllinen tunniste.
+        expense_data: Muokattavan kulun tiedot tai None uuden kulun tapauksessa.
+        expense_id: Muokattavan kulun yksilöllinen tunniste tai None uuden kulun tapauksessa.
+    """
+
     def __init__(self, parent, user_id, expense_data=None):
+        """Luokan konstruktori, joka luo uuden kulun lisäämis- tai muokkausnäkymän.
+        
+        Args:
+            parent: Isäntäikkuna, johon tämä näkymä liittyy.
+            user_id: Käyttäjän yksilöllinen tunniste.
+            expense_data: Muokattavan kulun tiedot tai None uuden kulun tapauksessa.
+        """
+
         super().__init__(parent)
         self.title("MoneyTrack - Add New Expense")
         self.user_id = user_id
@@ -60,6 +76,13 @@ class AddExpenseView(tk.Toplevel):
         self.geometry('{}x{}+{}+{}'.format(width, height, x, y))
 
     def save_expense(self):
+        """Tallentaa kulun tiedot tietokantaan.
+        
+        Validoi syötetyt tiedot ja tallentaa ne joko uutena kuluna tai päivittää
+        olemassa olevan kulun tietoja riippuen siitä, onko kyseessä uusi vai
+        muokattava kulu.
+        """
+        
         amount = self.amount_entry.get()
         category = self.category_combobox.get()
         date = self.date_entry.get()

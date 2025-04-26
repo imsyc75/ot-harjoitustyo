@@ -4,10 +4,23 @@ from entities.user import User
 from ui.style import Style
 
 class LoginView(tk.Toplevel):
-    def __init__(self, parent, on_login_success):
+    """Luokka, joka vastaa kirjautumisnäkymästä.
+    
+    Attributes:
+        on_login_open: Callback-funktio, jota kutsutaan onnistuneen kirjautumisen jälkeen.
+    """
+
+    def __init__(self, parent, on_login_open):
+        """Luokan konstruktori, joka luo uuden kirjautumisnäkymän.
+        
+        Args:
+            parent: Isäntäikkuna, johon tämä näkymä liittyy.
+            on_login_open: Callback-funktio, jota kutsutaan onnistuneen kirjautumisen jälkeen.
+        """
+
         super().__init__(parent)
         self.title("MoneyTrack - Login")
-        self.on_login_success = on_login_success
+        self.on_login_open = on_login_open
 
         Style.apply_style(self)
 
@@ -29,6 +42,13 @@ class LoginView(tk.Toplevel):
         self.resizable(True, True)
 
     def handle_login(self):
+        """Käsittelee käyttäjän kirjautumisyrityksen.
+        
+        Tarkistaa käyttäjänimen ja salasanan oikeellisuuden tietokannasta
+        ja kutsuu onnistuneen kirjautumisen callback-funktiota, jos
+        kirjautumistiedot ovat oikein.
+        """
+
         username = self.username_entry.get()
         password = self.password_entry.get()
 
@@ -36,7 +56,7 @@ class LoginView(tk.Toplevel):
         user_data = user_obj.find_by_username()
         if user_data is not None:
             if user_data["password"] == password:
-                self.on_login_success(username)
+                self.on_login_open(username)
                 self.destroy()
             else:
                 messagebox.showerror("Error", "Username or password is not correct!")
@@ -44,5 +64,8 @@ class LoginView(tk.Toplevel):
             messagebox.showerror("Error", "Username does not exsist")
 
     def open_register(self):
+        """Avaa rekisteröitymisnäkymän.
+        """
+        
         from .register_view import RegisterView
         RegisterView(self)

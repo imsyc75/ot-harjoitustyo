@@ -4,7 +4,16 @@ from entities.user import User
 from ui.style import Style
 
 class RegisterView(tk.Toplevel):
+    """Luokka, joka vastaa käyttäjän rekisteröitymisnäkymästä.
+    """
+
     def __init__(self, parent):
+        """Luokan konstruktori, joka luo uuden rekisteröitymisnäkymän.
+        
+        Args:
+            parent: Isäntäikkuna, johon tämä näkymä liittyy.
+        """
+
         super().__init__(parent)
         self.title("MoneyTrack - Register")
 
@@ -25,6 +34,13 @@ class RegisterView(tk.Toplevel):
         self.resizable(True, True)
 
     def handle_register(self):
+        """Käsittelee käyttäjän rekisteröitymisen.
+        
+        Tarkistaa syötettyjen tietojen kelpoisuuden ja tallentaa uuden käyttäjän 
+        tietokantaan. Ilmoittaa käyttäjälle rekisteröitymisen onnistumisesta 
+        tai epäonnistumisesta.
+        """
+        
         username = self.username_entry.get()
         password = self.password_entry.get()
 

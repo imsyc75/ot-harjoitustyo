@@ -6,7 +6,27 @@ from ui.add_expenses_view import AddExpenseView
 from ui.style import Style
 
 class ExpensesView(tk.Toplevel):
+    """Luokka, joka vastaa käyttäjän kulujen näyttämisestä ja hallinnasta.
+    
+    Näkymä sisältää kulujen listauksen, suodatusmahdollisuudet sekä toiminnot
+    kulujen lisäämiseen, muokkaamiseen ja poistamiseen.
+    
+    Attributes:
+        user_id: Kirjautuneen käyttäjän yksilöllinen tunniste.
+        parent: Isäntäikkuna, johon tämä näkymä liittyy.
+        current_date: Nykyinen päivämäärä.
+        current_month: Valittu kuukausi suodatukseen.
+        current_year: Valittu vuosi suodatukseen.
+    """
+
     def __init__(self, parent, user_id):
+        """Luokan konstruktori, joka luo uuden kulunhallinnan päänäkymän.
+        
+        Args:
+            parent: Isäntäikkuna, johon tämä näkymä liittyy.
+            user_id: Kirjautuneen käyttäjän yksilöllinen tunniste.
+        """
+
         super().__init__(parent)
         self.title("MoneyTrack - Expenses")
         self.user_id = user_id
@@ -92,12 +112,24 @@ class ExpensesView(tk.Toplevel):
         self.resizable(True, True)
 
     def logout(self):
+        """Käsittelee käyttäjän uloskirjautumisen.
+        
+        Vahvistaa uloskirjautumisen käyttäjältä ja palauttaa sovelluksen
+        kirjautumisnäkymään, jos käyttäjä vahvistaa toiminnon.
+        """
+
         confirm = messagebox.askyesno("Confirm Logout", "Are you sure you want to logout?")
         if confirm:
             self.destroy()
             self.parent.show_login()
 
     def filter_expenses(self):
+        """Suodattaa kulut valitun kuukauden ja vuoden perusteella.
+        
+        Tarkistaa annettujen arvojen kelpoisuuden ja päivittää näkymän
+        vastaamaan valittua aikaväliä.
+        """
+
         try:
             selected_month = self.month_combobox.current() + 1
             selected_year = int(self.year_var.get())
@@ -114,6 +146,12 @@ class ExpensesView(tk.Toplevel):
             messagebox.showerror("Wrong", "Please enter valid year!")
 
     def load_expenses(self):
+        """Lataa käyttäjän kulut tietokannasta ja päivittää näkymän.
+        
+        Hakee kulut valitulta kuukaudelta, päivittää kulutaulukon sekä
+        kuukauden kokonaiskulujen summan.
+        """
+
         for item in self.expenses_tree.get_children():
             self.expenses_tree.delete(item)
 
@@ -155,11 +193,22 @@ class ExpensesView(tk.Toplevel):
             self.total_label.config(text=f"This month you spend: ${total_expenses:.2f}")
 
     def open_add_expense(self):
+        """Avaa uuden kulun lisäämisen näkymän.
+        
+        Odottaa näkymän sulkemista ja päivittää kulutaulukon.
+        """
+                
         add_view = AddExpenseView(self, self.user_id)
         self.wait_window(add_view)
         self.load_expenses()
 
     def get_selected_expense_id(self):
+        """Hakee valitun kulun tunnisteen.
+        
+        Returns:
+            Valitun kulun tunniste tai None, jos mitään kulua ei ole valittu.
+        """
+
         selected_items = self.expenses_tree.selection()
         if not selected_items:
             messagebox.showwarning("Warning", "Please select an expense first")
@@ -172,6 +221,12 @@ class ExpensesView(tk.Toplevel):
         return item_values[0]
 
     def delete_selected_expense(self):
+        """Poistaa valitun kulun.
+        
+        Varmistaa toiminnon käyttäjältä ja poistaa kulun tietokannasta,
+        jos käyttäjä vahvistaa toiminnon.
+        """
+                
         expense_id = self.get_selected_expense_id()
         if not expense_id:
             return
@@ -188,6 +243,12 @@ class ExpensesView(tk.Toplevel):
             messagebox.showerror("Error", "Failed to delete expense. Please try again.")
 
     def edit_selected_expense(self):
+        """Avaa valitun kulun muokkausnäkymän.
+        
+        Hakee valitun kulun tiedot tietokannasta ja avaa muokkausnäkymän.
+        Odottaa näkymän sulkemista ja päivittää kulutaulukon.
+        """
+        
         expense_id = self.get_selected_expense_id()
         if not expense_id:
             return

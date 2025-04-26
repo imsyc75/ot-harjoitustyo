@@ -3,7 +3,6 @@ from tkinter import ttk
 import sys
 
 class Style:
-    # clours
     PINK_LIGHT = "#FFE6E8"
     PINK_MEDIUM = "#FFCCD0"
     PINK_DARK = "#FF9FA7"
