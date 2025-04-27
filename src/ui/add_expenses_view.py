@@ -59,10 +59,10 @@ class AddExpenseView(tk.Toplevel):
         button_frame = tk.Frame(self)
         button_frame.grid(row=4, column=0, columnspan=2, pady=10)
 
-        save_button = tk.Button(button_frame, text="Save", command=self.save_expense)
+        save_button = Style.create_button(button_frame, text="Save", command=self.save_expense, is_primary=True)
         save_button.pack(side=tk.LEFT, padx=5)
 
-        cancel_button = tk.Button(button_frame, text="Cancel", command=self.destroy)
+        cancel_button = Style.create_button(button_frame, text="Cancel", command=self.destroy, is_primary=True)
         cancel_button.pack(side=tk.LEFT, padx=5)
 
         self.geometry("400x250")

@@ -10,7 +10,7 @@ class Style:
     TEXT_COLOR = "#5A5A5A"
     ACCENT_COLOR = "#FF6B81"
 
-    FONT_FAMILY = "Comic Sans MS" if "win" in sys.platform else "Marker Felt"
+    FONT_FAMILY = "Times New Roman"
     FONT_SIZE_SMALL = 10
     FONT_SIZE_NORMAL = 12
     FONT_SIZE_LARGE = 14
@@ -29,7 +29,7 @@ class Style:
                        background=cls.WHITE,
                        fieldbackground=cls.WHITE,
                        foreground=cls.TEXT_COLOR,
-                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_SMALL))
+                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL))
 
         style.configure("Treeview.Heading",
                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL, "bold"),
@@ -40,8 +40,8 @@ class Style:
                       background=cls.PINK_MEDIUM,
                       foreground=cls.TEXT_COLOR,
                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL),
-                      borderwidth=1,
-                      relief="raised",
+                      borderwidth=0,
+                      relief="flat",
                       padding=6)
 
         style.map("TButton",
@@ -75,19 +75,19 @@ class Style:
         return label
 
     @classmethod
-    def create_cute_button(cls, parent, text, command, is_primary=False):
+    def create_button(cls, parent, text, command, is_primary=True):
         # generoitu koodi alkaa
-        bg_color = cls.ACCENT_COLOR if is_primary else cls.PINK_MEDIUM
-        fg_color = cls.WHITE if is_primary else cls.TEXT_COLOR
+        bg_color = "#FF4D67" if is_primary else cls.PINK_DARK
+        fg_color = cls.PINK_DARK
 
         button = tk.Button(parent,
                          text=text,
                          command=command,
-                         bg=bg_color,
-                         fg=fg_color,
-                         font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL),
-                         relief=tk.RAISED,
-                         borderwidth=2,
+                         background=bg_color,
+                         foreground=fg_color,
+                         font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL, "bold"),
+                         relief=tk.FLAT,
+                         borderwidth=0,
                          padx=15,
                          pady=5,
                          cursor="heart" if "win" in sys.platform else "hand2")
@@ -97,17 +97,4 @@ class Style:
         button.bind("<Leave>", lambda e: e.widget.config(background=bg_color))
         # generoitu koodi loppuu
         return button
-
-    @classmethod
-    def create_rounded_entry(cls, parent):
-        # generoitu koodi alkaa
-        frame = tk.Frame(parent, bg=cls.PINK_MEDIUM, padx=2, pady=2)
-        entry = tk.Entry(frame,
-                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL),
-                       bg=cls.WHITE,
-                       fg=cls.TEXT_COLOR,
-                       relief=tk.FLAT,
-                       insertbackground=cls.ACCENT_COLOR)
-        entry.pack(fill=tk.BOTH, expand=True)
-        # generoitu koodi loppuu
-        return frame, entry
+    

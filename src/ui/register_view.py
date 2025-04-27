@@ -27,7 +27,7 @@ class RegisterView(tk.Toplevel):
         self.password_entry = tk.Entry(self, show="*")
         self.password_entry.grid(row=1, column=1, padx=10, pady=5)
 
-        register_button = tk.Button(self, text="Submit", command=self.handle_register)
+        register_button = Style.create_button(self, text="Submit", command=self.handle_register, is_primary=True)
         register_button.grid(row=2, column=1, sticky=tk.E, padx=10, pady=5)
 
         self.geometry("700x600")

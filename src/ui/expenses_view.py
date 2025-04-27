@@ -55,16 +55,16 @@ class ExpensesView(tk.Toplevel):
         self.year_entry = tk.Entry(top_frame, textvariable=self.year_var, width=6)
         self.year_entry.pack(side=tk.LEFT, padx=5, pady=5)
 
-        search_button = tk.Button(top_frame, text="Search", command=self.filter_expenses)
+        search_button = Style.create_button(top_frame, text="Search", command=self.filter_expenses, is_primary=True)
         search_button.pack(side=tk.LEFT, padx=10, pady=5)
 
-        logout_button = tk.Button(top_frame, text="Logout", command=self.logout)
+        logout_button = Style.create_button(top_frame, text="Logout", command=self.logout, is_primary=True)
         logout_button.pack(side=tk.RIGHT, padx=10, pady=5)
 
         button_frame = tk.Frame(self)
         button_frame.pack(fill=tk.X, padx=10, pady=5)
 
-        add_button = tk.Button(button_frame, text="Add New Expense", command=self.open_add_expense)
+        add_button = Style.create_button(button_frame, text="Add New Expense", command=self.open_add_expense, is_primary=True)
         add_button.pack(side=tk.LEFT, padx=5, pady=5)
 
         self.expenses_frame = tk.Frame(self)
@@ -93,10 +93,10 @@ class ExpensesView(tk.Toplevel):
         action_frame = tk.Frame(self)
         action_frame.pack(fill=tk.X, padx=10, pady=5)
 
-        edit_button = tk.Button(action_frame, text="Edit Selected", command=self.edit_selected_expense)
+        edit_button = Style.create_button(action_frame, text="Edit Selected", command=self.edit_selected_expense, is_primary=True)
         edit_button.pack(side=tk.LEFT, padx=5, pady=5)
 
-        delete_button = tk.Button(action_frame, text="Delete Selected", command=self.delete_selected_expense)
+        delete_button = Style.create_button(action_frame, text="Delete Selected", command=self.delete_selected_expense, is_primary=True)
         delete_button.pack(side=tk.LEFT, padx=5, pady=5)
 
         self.summary_frame = tk.Frame(self)
