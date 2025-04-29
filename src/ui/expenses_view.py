@@ -1,16 +1,17 @@
 import tkinter as tk
 import datetime
-from tkinter import ttk, messagebox
+import csv
+from tkinter import ttk, messagebox, filedialog
 from entities.expenses import Expense
 from ui.add_expenses_view import AddExpenseView
 from ui.style import Style
 
 class ExpensesView(tk.Toplevel):
     """Luokka, joka vastaa käyttäjän kulujen näyttämisestä ja hallinnasta.
-    
+
     Näkymä sisältää kulujen listauksen, suodatusmahdollisuudet sekä toiminnot
     kulujen lisäämiseen, muokkaamiseen ja poistamiseen.
-    
+
     Attributes:
         user_id: Kirjautuneen käyttäjän yksilöllinen tunniste.
         parent: Isäntäikkuna, johon tämä näkymä liittyy.
@@ -21,7 +22,7 @@ class ExpensesView(tk.Toplevel):
 
     def __init__(self, parent, user_id):
         """Luokan konstruktori, joka luo uuden kulunhallinnan päänäkymän.
-        
+
         Args:
             parent: Isäntäikkuna, johon tämä näkymä liittyy.
             user_id: Kirjautuneen käyttäjän yksilöllinen tunniste.
@@ -31,6 +32,7 @@ class ExpensesView(tk.Toplevel):
         self.title("MoneyTrack - Expenses")
         self.user_id = user_id
         self.parent = parent
+        self.current_expenses = []
 
         Style.apply_style(self)
 
@@ -57,6 +59,9 @@ class ExpensesView(tk.Toplevel):
 
         search_button = Style.create_button(top_frame, text="Search", command=self.filter_expenses, is_primary=True)
         search_button.pack(side=tk.LEFT, padx=10, pady=5)
+
+        export_button = Style.create_button(top_frame, text="Export CSV", command=self.export_to_csv, is_primary=True)
+        export_button.pack(side=tk.LEFT, padx=10, pady=5)
 
         logout_button = Style.create_button(top_frame, text="Logout", command=self.logout, is_primary=True)
         logout_button.pack(side=tk.RIGHT, padx=10, pady=5)
@@ -113,7 +118,7 @@ class ExpensesView(tk.Toplevel):
 
     def logout(self):
         """Käsittelee käyttäjän uloskirjautumisen.
-        
+
         Vahvistaa uloskirjautumisen käyttäjältä ja palauttaa sovelluksen
         kirjautumisnäkymään, jos käyttäjä vahvistaa toiminnon.
         """
@@ -125,7 +130,7 @@ class ExpensesView(tk.Toplevel):
 
     def filter_expenses(self):
         """Suodattaa kulut valitun kuukauden ja vuoden perusteella.
-        
+
         Tarkistaa annettujen arvojen kelpoisuuden ja päivittää näkymän
         vastaamaan valittua aikaväliä.
         """
@@ -147,7 +152,7 @@ class ExpensesView(tk.Toplevel):
 
     def load_expenses(self):
         """Lataa käyttäjän kulut tietokannasta ja päivittää näkymän.
-        
+
         Hakee kulut valitulta kuukaudelta, päivittää kulutaulukon sekä
         kuukauden kokonaiskulujen summan.
         """
@@ -168,6 +173,7 @@ class ExpensesView(tk.Toplevel):
 
         expense_obj = Expense(user_id=self.user_id)
         expenses = expense_obj.get_expenses_by_date_range(start_date, end_date)
+        self.current_expenses = expenses
 
         total_expenses = 0.0
 
@@ -192,19 +198,56 @@ class ExpensesView(tk.Toplevel):
                 total_expenses += expense["amount"]
             self.total_label.config(text=f"This month you spend: ${total_expenses:.2f}")
 
+    def export_to_csv(self):
+        if not self.current_expenses:
+            messagebox.showinfo("Info", "No expenses to export")
+            return
+
+        default_filename = f"expenses_{self.current_year}_{self.current_month:02d}.csv"
+
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            initialfile=default_filename,
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
+        )
+
+        if not file_path:
+            return
+
+        try:
+            with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
+                csv_writer = csv.writer(csvfile)
+
+                csv_writer.writerow(["ID", "Amount", "Category", "Date", "Description"])
+
+                for expense in self.current_expenses:
+                    csv_writer.writerow([
+                        expense["id"],
+                        expense["amount"],
+                        expense["category"],
+                        expense["date"],
+                        expense["description"]
+                    ])
+
+            messagebox.showinfo("Success", f"Expenses exported successfully to:\n{file_path}")
+
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to export expenses: {str(e)}")
+
+
     def open_add_expense(self):
         """Avaa uuden kulun lisäämisen näkymän.
-        
+
         Odottaa näkymän sulkemista ja päivittää kulutaulukon.
         """
-                
+
         add_view = AddExpenseView(self, self.user_id)
         self.wait_window(add_view)
         self.load_expenses()
 
     def get_selected_expense_id(self):
         """Hakee valitun kulun tunnisteen.
-        
+
         Returns:
             Valitun kulun tunniste tai None, jos mitään kulua ei ole valittu.
         """
@@ -222,11 +265,11 @@ class ExpensesView(tk.Toplevel):
 
     def delete_selected_expense(self):
         """Poistaa valitun kulun.
-        
+
         Varmistaa toiminnon käyttäjältä ja poistaa kulun tietokannasta,
         jos käyttäjä vahvistaa toiminnon.
         """
-                
+
         expense_id = self.get_selected_expense_id()
         if not expense_id:
             return
@@ -244,11 +287,11 @@ class ExpensesView(tk.Toplevel):
 
     def edit_selected_expense(self):
         """Avaa valitun kulun muokkausnäkymän.
-        
+
         Hakee valitun kulun tiedot tietokannasta ja avaa muokkausnäkymän.
         Odottaa näkymän sulkemista ja päivittää kulutaulukon.
         """
-        
+
         expense_id = self.get_selected_expense_id()
         if not expense_id:
             return

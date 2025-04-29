@@ -2,7 +2,7 @@ from database_connection import get_db_connection
 
 def drop_tables(conn):
     """Poistaa tietokannan taulut, jos ne ovat olemassa.
-    
+
     Args:
         conn: Tietokantayhteys.
     """
@@ -14,11 +14,11 @@ def drop_tables(conn):
 
 def create_tables(conn):
     """Luo tietokannan taulut.
-    
+
     Args:
         conn: Tietokantayhteys.
     """
-        
+
     cursor = conn.cursor()
     # generoitu koodi alkaa
     cursor.execute("""
@@ -45,7 +45,7 @@ def create_tables(conn):
 def initialize_database():
     """Alustaa tietokannan poistamalla vanhat taulut ja luomalla uudet.
     """
-    
+
     conn = get_db_connection()
     drop_tables(conn)
     create_tables(conn)
@@ -55,4 +55,3 @@ def initialize_database():
 
 if __name__ == "__main__":
     initialize_database()
-    

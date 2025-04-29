@@ -4,7 +4,7 @@ from ui.expenses_view import ExpensesView
 
 class MoneyTrackApp(tk.Tk):
     """Luokka, joka hallinnoi koko sovellusta.
-    
+
     Luokka vastaa sovellusikkunoiden vaihtamisesta ja hallinnasta.
     """
 
@@ -22,10 +22,10 @@ class MoneyTrackApp(tk.Tk):
 
     def show_login(self):
         """Näyttää kirjautumisnäkymän.
-        
+
         Tuhoaa mahdolliset aiemmat ikkunat ja luo uuden kirjautumisikkunan.
         """
-                
+
         if self.login_window and self.login_window.winfo_exists():
             self.login_window.destroy()
 
@@ -37,22 +37,22 @@ class MoneyTrackApp(tk.Tk):
 
     def on_login_close(self):
         """Käsittelee kirjautumisikkunan sulkemisen.
-        
+
         Tuhoaa kirjautumisikkunan ja sulkee sovelluksen.
         """
-                
+
         self.login_window.destroy()
         self.destroy()
 
     def on_login_open(self, username):
         """Käsittelee onnistuneen kirjautumisen.
-        
+
         Tuhoaa kirjautumisikkunan ja luo kulunhallintanäkymän.
-        
+
         Args:
             username: Kirjautuneen käyttäjän käyttäjänimi.
         """
-                
+
         print(f"User {username} logged in!")
         if self.login_window and self.login_window.winfo_exists():
             self.login_window.destroy()
@@ -61,10 +61,10 @@ class MoneyTrackApp(tk.Tk):
 
     def on_expenses_close(self):
         """Käsittelee kulunhallintaikkunan sulkemisen.
-        
+
         Tuhoaa kulunhallintaikkunan ja sulkee sovelluksen.
         """
-                
+
         if self.expenses_window and self.expenses_window.winfo_exists():
             self.expenses_window.destroy()
         self.destroy()
@@ -72,4 +72,3 @@ class MoneyTrackApp(tk.Tk):
 if __name__ == "__main__":
     app = MoneyTrackApp()
     app.mainloop()
-    
