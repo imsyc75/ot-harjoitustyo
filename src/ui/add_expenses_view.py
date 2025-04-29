@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from entities.expenses import Expense
 import datetime
+from entities.expenses import Expense
 from ui.style import Style
 
 class AddExpenseView(tk.Toplevel):
     """Luokka, joka vastaa kulun lisäämisen tai muokkaamisen näkymästä.
-    
+
     Attributes:
         user_id: Käyttäjän yksilöllinen tunniste.
         expense_data: Muokattavan kulun tiedot tai None uuden kulun tapauksessa.
@@ -15,7 +15,7 @@ class AddExpenseView(tk.Toplevel):
 
     def __init__(self, parent, user_id, expense_data=None):
         """Luokan konstruktori, joka luo uuden kulun lisäämis- tai muokkausnäkymän.
-        
+
         Args:
             parent: Isäntäikkuna, johon tämä näkymä liittyy.
             user_id: Käyttäjän yksilöllinen tunniste.
@@ -56,6 +56,19 @@ class AddExpenseView(tk.Toplevel):
         self.description_entry = tk.Entry(self)
         self.description_entry.grid(row=3, column=1, padx=10, pady=5)
 
+        if expense_data: # If in edit mode, fill in the existing information
+            self.amount_entry.delete(0, tk.END)
+            self.date_entry.delete(0, tk.END)
+
+            self.amount_entry.insert(0, str(expense_data["amount"]))
+
+            if expense_data["category"] in self.categories:
+                self.category_combobox.set(expense_data["category"])
+
+            self.date_entry.insert(0, expense_data["date"])
+
+            self.description_entry.insert(0, expense_data["description"])
+
         button_frame = tk.Frame(self)
         button_frame.grid(row=4, column=0, columnspan=2, pady=10)
 
@@ -77,12 +90,12 @@ class AddExpenseView(tk.Toplevel):
 
     def save_expense(self):
         """Tallentaa kulun tiedot tietokantaan.
-        
+
         Validoi syötetyt tiedot ja tallentaa ne joko uutena kuluna tai päivittää
         olemassa olevan kulun tietoja riippuen siitä, onko kyseessä uusi vai
         muokattava kulu.
         """
-        
+
         amount = self.amount_entry.get()
         category = self.category_combobox.get()
         date = self.date_entry.get()
