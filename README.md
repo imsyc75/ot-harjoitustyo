@@ -12,6 +12,7 @@ MoneyTrackApp antaa käyttäjille mahdollisuuden tallentaa päivittäiset kulutu
 
 ## Releaset
 [Viikon 5 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko5)
+[Viikon 6 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Asennus
 1. Kloonaa koneellesi ja asenna riippuvuudet komennolla
