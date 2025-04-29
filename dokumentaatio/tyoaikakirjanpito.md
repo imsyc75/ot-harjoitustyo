@@ -8,7 +8,6 @@ viikko2
 | 24.2. | 1    | vaatimusmäärittelyn kirjoittaminen |
 | yht   | 2  | | 
 
-
 viikko3
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
@@ -26,7 +25,7 @@ viikko4
 | 8.4 | 2   | pylint ja arkkitehtuuri.md kirjoittaminen |
 | yht   | 10  | | 
 
-viikko4
+viikko5
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
 | 10.4 | 2    | uusi toiminnallisuuden toteutus  |
@@ -34,4 +33,13 @@ viikko4
 | 15.4 | 3   | logout toteutus, ui sunnittelu ja muut |
 | yht   | 8  | | 
 
+viikko6
+| päivä | aika | mitä tein  |
+| :----:|:-----| :-----|
+| 16.4 | 1   | docstring lisäminen  |
+| 17.4 | 1   | docstring lisäminen |
+| 27.4 | 2.5   | Koodikatselmointi ja UI optimointi |
+| 28.4 | 0.5   | uusi toiminnallisuuden toteutus|
+| 29.4 | 6   | uusi toiminnallisuuden toteutus, testaus, dokumentaation kirjoittaminen |
+| yht   | 10  | | 
 

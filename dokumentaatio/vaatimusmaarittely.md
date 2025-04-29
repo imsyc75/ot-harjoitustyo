@@ -26,8 +26,8 @@ Aluksi sovelluksessa on vain tavallisia käyttäjiä, ja myöhemmin voidaan lis�
 ## Jatkokehitysideoita
 - Käyttäjä voi luoda uusi tulo.
 - Käyttäjä voi luoda yhteenveto kuluista kuukausittain. (tehty)
-- Käyttäjä voi tarkastella kuluja kategorian ja päivämäärän mukaan
-- Käyttäjä voi luoda piirakkakaavio kuluista
+- Käyttäjä voi suodattaa kuluja päivämäärän mukaan(tehty)
+- Käyttäjä voi luoda piirakkakaavio kuluista(tehty: CSV file)
 
 ## Käyttöliittymäluonnos
 Sovellus avautuu kirjautumissivuun. Kirjautumissivulla voidaan siirtyä uuden käyttäjän luontisivuun. Onnistuneen kirjautumisen jälkeen siirtyy kirjautuneen käyttäjän henkilökohtaiseen sivuun.
