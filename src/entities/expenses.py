@@ -86,7 +86,7 @@ class Expense:
             end_date (str): Aikavälin lopetuspäivämäärä muodossa YYYY-MM-DD.
 
         Returns:
-            Lista käyttäjän kuluista annetulla aikavälillä 
+            Lista käyttäjän kuluista annetulla aikavälillä
             järjestettynä päivämäärän mukaan laskevasti.
         """
 
