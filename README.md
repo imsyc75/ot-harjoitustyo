@@ -9,6 +9,7 @@ MoneyTrackApp antaa käyttäjille mahdollisuuden tallentaa päivittäiset kulutu
 - [Työaikakirjanpito](./dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
 - [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
+- [Käyttöohje](./dokumentaatio/kayttoohje.md)
 
 ## Releaset
 [Viikon 5 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko5)

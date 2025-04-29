@@ -1,5 +1,5 @@
 # Työaikakirjanpito
-Yhteensä 32h
+Yhteensä 42h
 
 viikko2
 | päivä | aika | mitä tein  |
