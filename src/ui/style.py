@@ -8,13 +8,13 @@ class Style:
     WHITE = "#FFFFFF"
     BLACK = "#000000"
     ACCENT_COLOR = "#D01F3C"
-    GREY = "#808080"
+    GREY = "#D3D3D3"
 
     FONT_FAMILY = "Times New Roman"
-    FONT_SIZE_SMALL = 10
-    FONT_SIZE_NORMAL = 12
-    FONT_SIZE_LARGE = 14
-    FONT_SIZE_XLARGE = 18
+    FONT_SIZE_SMALL = 12
+    FONT_SIZE_NORMAL = 14
+    FONT_SIZE_LARGE = 18
+    FONT_SIZE_XLARGE = 20
 
     @classmethod
     def apply_style(cls, root):
