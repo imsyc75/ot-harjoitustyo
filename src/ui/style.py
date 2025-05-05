@@ -1,14 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
-import sys
 
 class Style:
     PINK_LIGHT = "#FFE6E8"
     PINK_MEDIUM = "#FFCCD0"
     PINK_DARK = "#FF9FA7"
     WHITE = "#FFFFFF"
-    TEXT_COLOR = "#5A5A5A"
-    ACCENT_COLOR = "#FF6B81"
+    BLACK = "#000000"
+    ACCENT_COLOR = "#D01F3C"
+    GREY = "#808080"
 
     FONT_FAMILY = "Times New Roman"
     FONT_SIZE_SMALL = 10
@@ -22,23 +22,23 @@ class Style:
         # generoitu koodi alkaa
         style.configure(".",
                        background=cls.PINK_LIGHT,
-                       foreground=cls.TEXT_COLOR,
+                       foreground=cls.BLACK,
                        font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL))
 
         style.configure("Treeview",
                        background=cls.WHITE,
                        fieldbackground=cls.WHITE,
-                       foreground=cls.TEXT_COLOR,
+                       foreground=cls.BLACK,
                        font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL))
 
         style.configure("Treeview.Heading",
                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL, "bold"),
                       background=cls.PINK_MEDIUM,
-                      foreground=cls.TEXT_COLOR)
+                      foreground=cls.BLACK)
 
         style.configure("TButton",
                       background=cls.PINK_MEDIUM,
-                      foreground=cls.TEXT_COLOR,
+                      foreground=cls.BLACK,
                       font=(cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL),
                       borderwidth=0,
                       relief="flat",
@@ -52,11 +52,11 @@ class Style:
                       background=cls.WHITE)
 
         root.option_add("*Entry.Background", cls.WHITE)
-        root.option_add("*Entry.Foreground", cls.TEXT_COLOR)
+        root.option_add("*Entry.Foreground", cls.BLACK)
         root.option_add("*Entry.Font", (cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL))
 
         root.option_add("*Label.Background", cls.PINK_LIGHT)
-        root.option_add("*Label.Foreground", cls.TEXT_COLOR)
+        root.option_add("*Label.Foreground", cls.BLACK)
         root.option_add("*Label.Font", (cls.FONT_FAMILY, cls.FONT_SIZE_NORMAL))
 
         root.option_add("*Frame.Background", cls.PINK_LIGHT)
@@ -77,7 +77,7 @@ class Style:
     @classmethod
     def create_button(cls, parent, text, command, is_primary=True):
         # generoitu koodi alkaa
-        bg_color = "#FF4D67" if is_primary else cls.PINK_DARK
+        bg_color = cls.GREY
         fg_color = cls.PINK_DARK
 
         button = tk.Button(parent,
@@ -89,8 +89,7 @@ class Style:
                          relief=tk.FLAT,
                          borderwidth=0,
                          padx=15,
-                         pady=5,
-                         cursor="heart" if "win" in sys.platform else "hand2")
+                         pady=5,)
 
         hover_color = cls.PINK_DARK if not is_primary else "#FF4D67"
         button.bind("<Enter>", lambda e: e.widget.config(background=hover_color))

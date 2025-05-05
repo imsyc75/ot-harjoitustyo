@@ -177,16 +177,15 @@ class ExpensesView(tk.Toplevel):
 
         total_expenses = 0.0
 
+        # generoitu koodi alkaa
+        for widget in self.expenses_frame.winfo_children():
+            if isinstance(widget, tk.Label) and widget.cget("text") == "You don't have any expenses yet":
+                widget.destroy()
+        # generoitu koodi päättyy
         if not expenses:
             message_label = tk.Label(self.expenses_frame, text="You don't have any expenses yet", font=("Arial", 14))
             message_label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         else:
-            # generoitu koodi alkaa
-            for widget in self.expenses_frame.winfo_children():
-                if isinstance(widget, tk.Label) and widget.cget("text") == "You don't have any expenses yet":
-                    widget.destroy()
-            # generoitu koodi päättyy
-
             for expense in expenses:
                 self.expenses_tree.insert("", tk.END, values=(
                     expense["id"],
@@ -196,7 +195,8 @@ class ExpensesView(tk.Toplevel):
                     expense["description"]
                 ))
                 total_expenses += expense["amount"]
-            self.total_label.config(text=f"This month you spend: ${total_expenses:.2f}")
+
+        self.total_label.config(text=f"This month you spend: ${total_expenses:.2f}")
 
     def export_to_csv(self):
         if not self.current_expenses:
