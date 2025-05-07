@@ -86,15 +86,9 @@ class ExpenseService:
         )
         expenses = [Expense.from_database_row(row) for row in expenses_data]
         
-        # Hae kategoriat
-        category_totals = self._expense_repository.get_category_totals(
-            user_id, start_date, end_date
-        )
-        
         return {
             "total": total,
             "expenses": expenses,
-            "category_totals": category_totals
         }
     
     def delete_expense(self, user_id, expense_id):
