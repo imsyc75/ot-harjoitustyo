@@ -42,11 +42,11 @@ class Expense:
         if not row:
             return None
         return Expense(
+            expense_id=row['id'],
             user_id=row['user_id'],
             amount=row['amount'],
             category=row['category'],
             description=row['description'],
             date=row['date'],
-            expense_id=row['id']
         )
     

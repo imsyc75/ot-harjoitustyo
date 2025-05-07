@@ -56,7 +56,7 @@ class ExpenseRepository(BaseRepository):
         Returns:
             Lista käyttäjän kuluista annetulla aikavälillä
         """
-        query = """SELECT id, amount, category, date, description
+        query = """SELECT id, user_id, amount, category, date, description
                 FROM expenses
                 WHERE user_id = ? AND date >= ? AND date < ?
                 ORDER BY date DESC"""

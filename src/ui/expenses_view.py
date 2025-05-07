@@ -184,7 +184,6 @@ class ExpensesView(tk.Toplevel):
                     expense["date"],
                     expense["description"]
                 ))
-                total_expenses += expense["amount"]
 
         self.total_label.config(text=f"This month you spend: ${total_expenses:.2f}")
 

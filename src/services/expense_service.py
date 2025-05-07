@@ -86,9 +86,20 @@ class ExpenseService:
         )
         expenses = [Expense.from_database_row(row) for row in expenses_data]
         
+        expenses_dicts = []
+        for expense in expenses:
+            expenses_dicts.append({
+                "id": expense.expense_id,
+                "user_id": expense.user_id,
+                "amount": expense.amount,
+                "category": expense.category,
+                "description": expense.description,
+                "date": expense.date
+            })
+
         return {
             "total": total,
-            "expenses": expenses,
+            "expenses": expenses_dicts,
         }
     
     def delete_expense(self, user_id, expense_id):
