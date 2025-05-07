@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import datetime
-from entities.expenses import Expense
+from services.expense_service import ExpenseService
 from ui.style import Style
 
 class AddExpenseView(tk.Toplevel):
@@ -26,6 +26,7 @@ class AddExpenseView(tk.Toplevel):
         self.title("MoneyTrack - Add New Expense")
         self.user_id = user_id
         self.expense_data = expense_data
+        self.expense_service = ExpenseService()
 
         Style.apply_style(self)
 
@@ -119,20 +120,24 @@ class AddExpenseView(tk.Toplevel):
             messagebox.showerror("Error", "Amount must be a positive number!")
             return
 
-        expense = Expense(
-            user_id=self.user_id,
-            amount=amount,
-            category=category,
-            date=date,
-            description=description
-        )
-
         success = False
         if self.expense_id:
-            success = expense.update(self.expense_id)
+            success = self.expense_service.update_expense({
+                "expense_id": self.expense_id,
+                "user_id": self.user_id,
+                "amount": amount,
+                "category": category,
+                "date": date,
+                "description": description
+            })
             message = "Expense updated successfully!"
         else:
-            success = expense.create()
+            success = self.expense_service.add_expense(
+                user_id=self.user_id,
+                amount=amount,
+                category=category,
+                date=date,
+                description=description)
             message = "Expense saved successfully!"
 
         if success:

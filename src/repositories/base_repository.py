@@ -28,12 +28,11 @@ class BaseRepository:
             else:
                 result = conn.execute(query)
             conn.commit()
-            return result
+            return result, conn
         except sqlite3.Error:
-            return None
-        finally:
             if conn:
                 conn.close()
+            return None, None
                 
     def fetch_one(self, query, params=None):
         """Suorittaa kyselyn ja palauttaa yhden tuloksen.
@@ -45,8 +44,14 @@ class BaseRepository:
         Returns:
             Yksi tulostietue tai None jos tulosta ei löydy
         """
-        result = self.execute_query(query, params)
-        return result.fetchone() if result else None
+        result, conn = self.execute_query(query, params)
+        try:
+            if result:
+                return result.fetchone()
+            return None
+        finally:
+            if conn:
+                conn.close()
         
     def fetch_all(self, query, params=None):
         """Suorittaa kyselyn ja palauttaa kaikki tulokset.
@@ -58,6 +63,12 @@ class BaseRepository:
         Returns:
             Lista tulostietueista tai tyhjä lista jos tuloksia ei löydy
         """
-        result = self.execute_query(query, params)
-        return result.fetchall() if result else []
+        result, conn = self.execute_query(query, params)
+        try:
+            if result:
+                return result.fetchall()
+            return []
+        finally:
+            if conn:
+                conn.close()
     

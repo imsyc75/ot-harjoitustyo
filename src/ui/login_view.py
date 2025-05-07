@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from entities.user import User
+from services.user_service import UserService
 from ui.style import Style
 
 class LoginView(tk.Toplevel):
@@ -21,6 +21,7 @@ class LoginView(tk.Toplevel):
         super().__init__(parent)
         self.title("MoneyTrack - Login")
         self.on_login_open = on_login_open
+        self.user_service = UserService()
 
         Style.apply_style(self)
 
@@ -52,16 +53,11 @@ class LoginView(tk.Toplevel):
         username = self.username_entry.get()
         password = self.password_entry.get()
 
-        user_obj = User(username)
-        user_data = user_obj.find_by_username()
-        if user_data is not None:
-            if user_data["password"] == password:
-                self.on_login_open(username)
-                self.destroy()
-            else:
-                messagebox.showerror("Error", "Username or password is not correct!")
+        if self.user_service.login(username, password):
+            self.on_login_open(username)
+            self.destroy()
         else:
-            messagebox.showerror("Error", "Username does not exsist")
+                messagebox.showerror("Error", "Username or password is not correct!")
 
     def open_register(self):
         """Avaa rekisteröitymisnäkymän.
@@ -69,3 +65,4 @@ class LoginView(tk.Toplevel):
         
         from .register_view import RegisterView
         RegisterView(self)
+        

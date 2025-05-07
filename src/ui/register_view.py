@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from entities.user import User
+from services.user_service import UserService
 from ui.style import Style
 
 class RegisterView(tk.Toplevel):
@@ -16,6 +16,7 @@ class RegisterView(tk.Toplevel):
 
         super().__init__(parent)
         self.title("MoneyTrack - Register")
+        self.user_service = UserService()
 
         Style.apply_style(self)
 
@@ -47,10 +48,10 @@ class RegisterView(tk.Toplevel):
         if not username or not password:
             messagebox.showerror("Error", "Username and password cannot be empty!")
             return
-
-        user_obj = User(username, password)
-        if user_obj.create():
+        
+        if self.user_service.register(username, password):
             messagebox.showinfo("Success", f"User {username} registered!")
             self.destroy()
         else:
             messagebox.showerror("Error", "Username already exists!")
+            

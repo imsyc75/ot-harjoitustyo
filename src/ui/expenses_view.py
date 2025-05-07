@@ -2,7 +2,7 @@ import tkinter as tk
 import datetime
 import csv
 from tkinter import ttk, messagebox, filedialog
-from entities.expenses import Expense
+from services.expense_service import ExpenseService
 from ui.add_expenses_view import AddExpenseView
 from ui.style import Style
 
@@ -33,6 +33,7 @@ class ExpensesView(tk.Toplevel):
         self.user_id = user_id
         self.parent = parent
         self.current_expenses = []
+        self.expense_service = ExpenseService()
 
         Style.apply_style(self)
 
@@ -160,33 +161,22 @@ class ExpensesView(tk.Toplevel):
         for item in self.expenses_tree.get_children():
             self.expenses_tree.delete(item)
 
-        start_date = f"{self.current_year}-{self.current_month:02d}-01"
-
-        if self.current_month == 12:
-            next_month = 1
-            next_year = self.current_year + 1
-        else:
-            next_month = self.current_month + 1
-            next_year = self.current_year
-
-        end_date = f"{next_year}-{next_month:02d}-01"
-
-        expense_obj = Expense(user_id=self.user_id)
-        expenses = expense_obj.get_expenses_by_date_range(start_date, end_date)
-        self.current_expenses = expenses
-
-        total_expenses = 0.0
+        monthly_report = self.expense_service.get_monthly_report(
+        self.user_id, self.current_year, self.current_month)
+    
+        self.current_expenses = monthly_report["expenses"]
+        total_expenses = monthly_report["total"]
 
         # generoitu koodi alkaa
         for widget in self.expenses_frame.winfo_children():
             if isinstance(widget, tk.Label) and widget.cget("text") == "You don't have any expenses yet":
                 widget.destroy()
         # generoitu koodi päättyy
-        if not expenses:
+        if not self.current_expenses:
             message_label = tk.Label(self.expenses_frame, text="You don't have any expenses yet", font=("Arial", 14))
             message_label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         else:
-            for expense in expenses:
+            for expense in self.current_expenses:
                 self.expenses_tree.insert("", tk.END, values=(
                     expense["id"],
                     f"${expense['amount']:.2f}",
@@ -278,8 +268,7 @@ class ExpensesView(tk.Toplevel):
         if not confirm:
             return
 
-        expense_obj = Expense(user_id=self.user_id)
-        if expense_obj.delete(expense_id):
+        if self.expense_service.delete_expense(self.user_id, expense_id):
             messagebox.showinfo("Success", "Expense deleted successfully")
             self.load_expenses()
         else:
@@ -296,8 +285,7 @@ class ExpensesView(tk.Toplevel):
         if not expense_id:
             return
 
-        expense_obj = Expense(user_id=self.user_id)
-        expense_data = expense_obj.get_by_id(expense_id)
+        expense_data = self.expense_service.get_expense_by_id(self.user_id, expense_id)
 
         if not expense_data:
             messagebox.showerror("Error", "Could not find the selected expense")
