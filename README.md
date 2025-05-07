@@ -26,9 +26,9 @@ poetry shell
 ```
 
 ## Komentorivitoiminnot
-Huom! Tietokanta voidaan nyt alustaa vain manuaalisesti. Alusta tietokanta ennen ohjelman käynnistämistä
+Alusta tietokanta ennen ohjelman käynnistämistä
 ```bash
-poetry run python3 src/initialize_database.py
+poetry run invoke build
 ```
 
 Ohjelman käynnistäminen

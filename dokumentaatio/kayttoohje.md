@@ -7,9 +7,9 @@
 ```bash
 poetry install
 ```
-2. Huom! Tietokanta voidaan nyt alustaa vain manuaalisesti. Alusta tietokanta ennen ohjelman käynnistämistä
+2. Alusta tietokanta ennen ohjelman käynnistämistä
 ```bash
-poetry run python3 src/initialize_database.py
+poetry run invoke build
 ```
 3. Nyt ohjelman voi käynnistää komennolla
 ```bash
