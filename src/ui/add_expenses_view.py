@@ -32,7 +32,7 @@ class AddExpenseView(tk.Toplevel):
 
         if expense_data:
             self.title("MoneyTrack - Edit Expense")
-            self.expense_id = expense_data["id"]
+            self.expense_id = expense_data.expense_id
         else:
             self.title("MoneyTrack - Add New Expense")
             self.expense_id = None
@@ -61,14 +61,14 @@ class AddExpenseView(tk.Toplevel):
             self.amount_entry.delete(0, tk.END)
             self.date_entry.delete(0, tk.END)
 
-            self.amount_entry.insert(0, str(expense_data["amount"]))
+            self.amount_entry.insert(0, expense_data.amount)
 
-            if expense_data["category"] in self.categories:
-                self.category_combobox.set(expense_data["category"])
+            if expense_data.category in self.categories:
+                self.category_combobox.set(expense_data.category)
 
-            self.date_entry.insert(0, expense_data["date"])
+            self.date_entry.insert(0, expense_data.date)
 
-            self.description_entry.insert(0, expense_data["description"])
+            self.description_entry.insert(0, expense_data.description)
 
         button_frame = tk.Frame(self)
         button_frame.grid(row=4, column=0, columnspan=2, pady=10)

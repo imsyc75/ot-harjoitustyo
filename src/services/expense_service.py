@@ -114,7 +114,7 @@ class ExpenseService:
         """
         return self._expense_repository.delete(expense_id, user_id)
     
-    def update_expense(self, expense):
+    def update_expense(self, expense_dict):
         """Päivittää kulun tiedot.
         
         Args:
@@ -123,6 +123,14 @@ class ExpenseService:
         Returns:
             True jos päivitys onnistui, muuten False
         """
+        expense = Expense(
+                user_id=expense_dict["user_id"],
+                amount=expense_dict["amount"],
+                category=expense_dict["category"],
+                description=expense_dict["description"],
+                date=expense_dict["date"],
+                expense_id=expense_dict["expense_id"]
+            )
         return self._expense_repository.update(expense)
     
     def get_expense_by_id(self, user_id, expense_id):
