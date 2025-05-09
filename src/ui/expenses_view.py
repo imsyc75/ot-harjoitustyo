@@ -62,12 +62,6 @@ class ExpensesView(tk.Toplevel):
         search_button = Style.create_button(top_frame, text="Search", command=self.filter_expenses, is_primary=True)
         search_button.pack(side=tk.LEFT, padx=10, pady=5)
 
-        export_button = Style.create_button(top_frame, text="Export CSV", command=self.export_to_csv, is_primary=True)
-        export_button.pack(side=tk.LEFT, padx=10, pady=5)
-
-        charts_button = Style.create_button(top_frame, text="View Chart", command=self.open_chart, is_primary=True)
-        charts_button.pack(side=tk.LEFT, padx=10, pady=5)
-
         logout_button = Style.create_button(top_frame, text="Logout", command=self.logout, is_primary=True)
         logout_button.pack(side=tk.RIGHT, padx=10, pady=5)
 
@@ -108,6 +102,15 @@ class ExpensesView(tk.Toplevel):
 
         delete_button = Style.create_button(action_frame, text="Delete Selected", command=self.delete_selected_expense, is_primary=True)
         delete_button.pack(side=tk.LEFT, padx=5, pady=5)
+        
+        chart_export_frame = tk.Frame(self)
+        chart_export_frame.pack(fill=tk.X, padx=10, pady=5)
+
+        export_button = Style.create_button(chart_export_frame, text="Export CSV", command=self.export_to_csv, is_primary=True)
+        export_button.pack(side=tk.RIGHT, padx=10, pady=5)
+
+        charts_button = Style.create_button(chart_export_frame, text="View Chart", command=self.open_chart, is_primary=True)
+        charts_button.pack(side=tk.RIGHT, padx=10, pady=5)
 
         self.summary_frame = tk.Frame(self)
         self.summary_frame.pack(fill=tk.X, padx=10, pady=10)
