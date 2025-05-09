@@ -4,6 +4,7 @@ import csv
 from tkinter import ttk, messagebox, filedialog
 from services.expense_service import ExpenseService
 from ui.add_expenses_view import AddExpenseView
+from ui.chart_view import ChartView
 from ui.style import Style
 
 class ExpensesView(tk.Toplevel):
@@ -64,6 +65,9 @@ class ExpensesView(tk.Toplevel):
         export_button = Style.create_button(top_frame, text="Export CSV", command=self.export_to_csv, is_primary=True)
         export_button.pack(side=tk.LEFT, padx=10, pady=5)
 
+        charts_button = Style.create_button(top_frame, text="View Chart", command=self.open_chart, is_primary=True)
+        charts_button.pack(side=tk.LEFT, padx=10, pady=5)
+
         logout_button = Style.create_button(top_frame, text="Logout", command=self.logout, is_primary=True)
         logout_button.pack(side=tk.RIGHT, padx=10, pady=5)
 
@@ -117,6 +121,10 @@ class ExpensesView(tk.Toplevel):
         self.geometry("700x600")
         self.resizable(True, True)
 
+    def open_chart(self):
+        """Avaa kaavionäkymän, jossa näkyy kuluvan kuukauden kululuokat ympyräkaaviona."""
+        ChartView(self, self.user_id, self.current_expenses, self.current_year, self.current_month)
+
     def logout(self):
         """Käsittelee käyttäjän uloskirjautumisen.
 
@@ -163,7 +171,7 @@ class ExpensesView(tk.Toplevel):
 
         monthly_report = self.expense_service.get_monthly_report(
         self.user_id, self.current_year, self.current_month)
-    
+
         self.current_expenses = monthly_report["expenses"]
         total_expenses = monthly_report["total"]
 
