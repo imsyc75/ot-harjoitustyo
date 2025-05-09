@@ -5,6 +5,9 @@ class ExpenseRepository(BaseRepository):
     """Luokka, joka käsittelee kulujen tietokanta toimintoja.
     Se perii BaseRepository-luokan yleiset tietokantaoperaatiot.
     """
+    def __init__(self):
+        """Alustaa ExpenseRepository-olion."""
+        super().__init__(table_name="expenses")
     
     def create(self, expense):
         """Tallentaa uuden kulun tietokantaan.
