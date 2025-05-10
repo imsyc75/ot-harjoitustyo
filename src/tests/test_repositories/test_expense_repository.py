@@ -45,10 +45,10 @@ class TestExpenseRepository(unittest.TestCase):
         self.assertTrue(result)
         expenses = expense_repository.get_all_for_user(self.user_id)
         self.assertEqual(len(expenses), 1)
-        self.assertEqual(expenses[0]["amount"], self.expense1.amount)
-        self.assertEqual(expenses[0]["category"], self.expense1.category)
-        self.assertEqual(expenses[0]["date"], self.expense1.date)
-        self.assertEqual(expenses[0]["description"], self.expense1.description)
+        self.assertEqual(expenses[0].amount, self.expense1.amount)
+        self.assertEqual(expenses[0].category, self.expense1.category)
+        self.assertEqual(expenses[0].date, self.expense1.date)
+        self.assertEqual(expenses[0].description, self.expense1.description)
 
     def test_get_all_for_user(self):
         expense_repository.create(self.expense1)
@@ -58,8 +58,8 @@ class TestExpenseRepository(unittest.TestCase):
         expenses = expense_repository.get_all_for_user(self.user_id)
 
         self.assertEqual(len(expenses), 2)
-        self.assertEqual(expenses[0]["date"], self.expense2.date)
-        self.assertEqual(expenses[1]["date"], self.expense1.date)
+        self.assertEqual(expenses[0].date, self.expense2.date)
+        self.assertEqual(expenses[1].date, self.expense1.date)
 
     def test_get_by_date_range(self):
         expense_repository.create(self.expense1)  # 2025-05-01
@@ -71,8 +71,8 @@ class TestExpenseRepository(unittest.TestCase):
         expenses = expense_repository.get_by_date_range(self.user_id, start_date, end_date)
 
         self.assertEqual(len(expenses), 2)
-        self.assertEqual(expenses[0]["date"], self.expense2.date)
-        self.assertEqual(expenses[1]["date"], self.expense1.date)
+        self.assertEqual(expenses[0].date, self.expense2.date)
+        self.assertEqual(expenses[1].date, self.expense1.date)
 
     def test_get_monthly_total(self):
         expense_repository.create(self.expense1)  # 2025-05-01, 100.50
@@ -93,13 +93,13 @@ class TestExpenseRepository(unittest.TestCase):
     def test_get_by_id(self):
         expense_repository.create(self.expense1)
         expenses = expense_repository.get_all_for_user(self.user_id)
-        expense_id = expenses[0]["id"]
+        expense_id = expenses[0].expense_id
 
         found_expense = expense_repository.get_by_id(expense_id, self.user_id)
 
         self.assertIsNotNone(found_expense)
-        self.assertEqual(found_expense["amount"], self.expense1.amount)
-        self.assertEqual(found_expense["category"], self.expense1.category)
+        self.assertEqual(found_expense.amount, self.expense1.amount)
+        self.assertEqual(found_expense.category, self.expense1.category)
 
     def test_get_by_id_not_found(self):
         found_expense = expense_repository.get_by_id(999, self.user_id)
@@ -108,7 +108,7 @@ class TestExpenseRepository(unittest.TestCase):
     def test_get_by_id_wrong_user(self):
         expense_repository.create(self.other_user_expense)
         expenses = expense_repository.get_all_for_user(self.other_user_id)
-        expense_id = expenses[0]["id"]
+        expense_id = expenses[0].expense_id
 
         found_expense = expense_repository.get_by_id(expense_id, self.user_id)
         self.assertIsNone(found_expense)
@@ -116,7 +116,7 @@ class TestExpenseRepository(unittest.TestCase):
     def test_update(self):
         expense_repository.create(self.expense1)
         expenses = expense_repository.get_all_for_user(self.user_id)
-        expense_id = expenses[0]["id"]
+        expense_id = expenses[0].expense_id
 
         updated_expense = Expense(
             expense_id=expense_id,
@@ -130,14 +130,14 @@ class TestExpenseRepository(unittest.TestCase):
 
         self.assertTrue(result)
         found_expense = expense_repository.get_by_id(expense_id, self.user_id)
-        self.assertEqual(found_expense["amount"], 120.00)
-        self.assertEqual(found_expense["category"], "Housing")
-        self.assertEqual(found_expense["date"], "2025-05-02")
+        self.assertEqual(found_expense.amount, 120.00)
+        self.assertEqual(found_expense.category, "Housing")
+        self.assertEqual(found_expense.date, "2025-05-02")
 
     def test_delete(self):
         expense_repository.create(self.expense1)
         expenses = expense_repository.get_all_for_user(self.user_id)
-        expense_id = expenses[0]["id"]
+        expense_id = expenses[0].expense_id
 
         result = expense_repository.delete(expense_id, self.user_id)
 
