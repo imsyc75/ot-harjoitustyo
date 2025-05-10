@@ -1,5 +1,6 @@
 import sqlite3
 from .base_repository import BaseRepository
+from entities.user import User
 
 class UserRepository(BaseRepository):
     """Luokka, joka käsittelee käyttäjien tietokanta toimintoja.
@@ -35,4 +36,5 @@ class UserRepository(BaseRepository):
             Käyttäjän tiedot tietueena tai None jos käyttäjää ei löydy
         """
         query = "SELECT * FROM users WHERE username = ?"
-        return self.fetch_one(query, (username,))
+        row = self.fetch_one(query, (username,))
+        return User.from_database_row(row)

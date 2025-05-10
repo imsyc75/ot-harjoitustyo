@@ -1,5 +1,6 @@
 import sqlite3
 from .base_repository import BaseRepository
+from entities.expenses import Expense
 
 class ExpenseRepository(BaseRepository):
     """Luokka, joka käsittelee kulujen tietokanta toimintoja.
@@ -46,7 +47,8 @@ class ExpenseRepository(BaseRepository):
                 FROM expenses
                 WHERE user_id = ?
                 ORDER BY date DESC"""
-        return self.fetch_all(query, (user_id,))
+        rows = self.fetch_all(query, (user_id,))
+        return [Expense.from_database_row(row) for row in rows]
 
     def get_by_date_range(self, user_id, start_date, end_date):
         """Hakee käyttäjän kulut tietyltä aikaväliltä.
@@ -63,7 +65,8 @@ class ExpenseRepository(BaseRepository):
                 FROM expenses
                 WHERE user_id = ? AND date >= ? AND date < ?
                 ORDER BY date DESC"""
-        return self.fetch_all(query, (user_id, start_date, end_date))
+        rows = self.fetch_all(query, (user_id, start_date, end_date))
+        return [Expense.from_database_row(row) for row in rows]
 
     def get_monthly_total(self, user_id, year, month):
         """Laskee käyttäjän kulujen kokonaissumman tietyltä kuukaudelta.
@@ -105,7 +108,8 @@ class ExpenseRepository(BaseRepository):
         """
         query = """SELECT * FROM expenses
                 WHERE id = ? AND user_id = ?"""
-        return self.fetch_one(query, (expense_id, user_id))
+        row = self.fetch_one(query, (expense_id, user_id))
+        return Expense.from_database_row(row)
 
     def update(self, expense):
         """Päivittää kulun tiedot tietokantaan.
