@@ -1,6 +1,6 @@
 import sqlite3
-from .base_repository import BaseRepository
 from entities.user import User
+from .base_repository import BaseRepository
 
 class UserRepository(BaseRepository):
     """Luokka, joka käsittelee käyttäjien tietokanta toimintoja.

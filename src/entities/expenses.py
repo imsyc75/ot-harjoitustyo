@@ -1,6 +1,6 @@
 class Expense:
     """luokka, joka edustaa käyttäjän kuluja.
-    
+
     Attributes:
         expense_id: Kulun yksilöllinen tunniste.
         user_id: Käyttäjän yksilöllinen tunniste.
@@ -13,7 +13,7 @@ class Expense:
     def __init__(self, user_id, amount=None, category=None, description=None,
                  date=None, expense_id=None):
         """Luokan konstruktori, joka luo uuden kulun.
-        
+
         Args:
             user_id: Käyttäjän yksilöllinen tunniste.
             amount: Kulun summa.
@@ -28,14 +28,14 @@ class Expense:
         self.category = category
         self.description = description
         self.date = date
-        
+
     @staticmethod
     def from_database_row(row):
         """Luo kulu-olion tietokannan rivistä.
-        
+
         Args:
             row: Tietokannan rivi, joka sisältää kulun tiedot.
-            
+
         Returns:
             Expense-olio tai None, jos rivi on tyhjä.
         """
@@ -49,4 +49,3 @@ class Expense:
             description=row['description'],
             date=row['date'],
         )
-    

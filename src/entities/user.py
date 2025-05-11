@@ -1,6 +1,6 @@
 class User:
     """Luokka, joka edustaa sovelluksen käyttäjää.
-    
+
     Attributes:
         user_id: Käyttäjän yksilöllinen tunniste.
         username: Käyttäjän käyttäjänimi.
@@ -9,7 +9,7 @@ class User:
 
     def __init__(self, username, password=None, user_id=None):
         """Luokan konstruktori, joka luo uuden käyttäjän.
-        
+
         Args:
             username: Käyttäjän käyttäjänimi.
             password: Käyttäjän salasana.
@@ -18,14 +18,14 @@ class User:
         self.user_id = user_id
         self.username = username
         self.password = password
-        
+
     @staticmethod
     def from_database_row(row):
         """Luo käyttäjäolion tietokannan rivistä.
-        
+
         Args:
             row: Tietokannan rivi, joka sisältää käyttäjän tiedot.
-            
+
         Returns:
             User-olio tai None, jos rivi on tyhjä.
         """
@@ -36,4 +36,3 @@ class User:
             password=row['password'],
             user_id=row['id']
         )
-    

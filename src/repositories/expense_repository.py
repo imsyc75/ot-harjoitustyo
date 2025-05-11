@@ -1,6 +1,6 @@
 import sqlite3
-from .base_repository import BaseRepository
 from entities.expenses import Expense
+from .base_repository import BaseRepository
 
 class ExpenseRepository(BaseRepository):
     """Luokka, joka käsittelee kulujen tietokanta toimintoja.
@@ -148,7 +148,7 @@ class ExpenseRepository(BaseRepository):
         """
         try:
             query = "DELETE FROM expenses WHERE id = ? AND user_id = ?"
-            result, conn = self.execute_query(query, (expense_id, user_id))
+            _, conn = self.execute_query(query, (expense_id, user_id))
 
             deleted_rows = conn.total_changes if conn else 0
             conn.close()
