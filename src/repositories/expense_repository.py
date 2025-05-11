@@ -79,16 +79,7 @@ class ExpenseRepository(BaseRepository):
         Returns:
             Kulujen kokonaissumma kyseiseltä kuukaudelta
         """
-        start_date = f"{year}-{month:02d}-01"
-
-        if month == 12:
-            next_month = 1
-            next_year = year + 1
-        else:
-            next_month = month + 1
-            next_year = year
-
-        end_date = f"{next_year}-{next_month:02d}-01"
+        start_date, end_date = BaseRepository.get_month_date_range(year, month)
 
         query = """SELECT SUM(amount) as total
                 FROM expenses

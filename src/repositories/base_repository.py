@@ -91,3 +91,27 @@ class BaseRepository:
             return True
         except sqlite3.Error:
             return False
+
+    @staticmethod
+    def get_month_date_range(year, month):
+        """Laskee tietyn kuukauden päivämäärävälin.
+
+        Args:
+            year: Vuosi
+            month: Kuukausi
+
+        Returns:
+            Tuple (start_date, end_date)
+        """
+        start_date = f"{year}-{month:02d}-01"
+
+        if month == 12:
+            next_month = 1
+            next_year = year + 1
+        else:
+            next_month = month + 1
+            next_year = year
+
+        end_date = f"{next_year}-{next_month:02d}-01"
+
+        return start_date, end_date

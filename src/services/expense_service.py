@@ -1,5 +1,6 @@
 from datetime import datetime
 from repositories.expense_repository import ExpenseRepository
+from repositories.base_repository import BaseRepository
 from entities.expenses import Expense
 
 class ExpenseService:
@@ -68,16 +69,7 @@ class ExpenseService:
         total = self._expense_repository.get_monthly_total(user_id, year, month)
 
         # Kuukauden päivämääräväli
-        start_date = f"{year}-{month:02d}-01"
-
-        if month == 12:
-            next_month = 1
-            next_year = year + 1
-        else:
-            next_month = month + 1
-            next_year = year
-
-        end_date = f"{next_year}-{next_month:02d}-01"
+        start_date, end_date = BaseRepository.get_month_date_range(year, month)
 
         # Hae kaikki kulut kuukaudelta
         expenses = self._expense_repository.get_by_date_range(
