@@ -10,27 +10,30 @@ MoneyTrackApp antaa käyttäjille mahdollisuuden tallentaa päivittäiset kulutu
 - [Changelog](./dokumentaatio/changelog.md)
 - [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
 - [Käyttöohje](./dokumentaatio/kayttoohje.md)
+- [Testaus](./dokumentaatio/Testaus.md)
 
 ## Releaset
-[Viikon 5 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko5)
-[Viikon 6 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko6)
+[Viikon 5 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko5)  
+[Viikon 6 release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko6)  
+[Final release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Asennus
-1. Kloonaa koneellesi ja asenna riippuvuudet komennolla
+Lataa projektin [Final release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko7) lähdekoodi.
+
+1. Asenna riippuvuudet komennolla
 ```bash
 poetry install
 ```
-2. Aktivoi virtuaaliympäristö
-```bash
-poetry shell
-```
-
-## Komentorivitoiminnot
-Alusta tietokanta ennen ohjelman käynnistämistä
+2. Alusta tietokanta ennen ohjelman käynnistämistä
 ```bash
 poetry run invoke build
 ```
+3. Käynnistä ohjelman
+```bash
+poetry run invoke start
+```
 
+## Komentorivitoiminnot
 Ohjelman käynnistäminen
 
 ```bash

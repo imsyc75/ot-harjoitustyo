@@ -1,4 +1,5 @@
 # Käyttöohje
+Lataa projektin [Final release](https://github.com/imsyc75/ot-harjoitustyo/releases/tag/viikko7) lähdekoodi.
 
 ## Konfigurointi
 Sovellus käyttää SQLite-tietokantaa käyttäjien ja kulujen tallentamiseen. Haluttaessa tiedoston nimi voidaan määrittää .env-tiedostossa. Tiedostot luodaan automaattisesti data-hakemistoon, jos niitä ei ole olemassa. Tiedostomuoto on seuraava:
