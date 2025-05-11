@@ -41,6 +41,6 @@ Kirjautumisen onnistumisen jälkeen, siirrytään käyttäjän omasivulla. Sivun
 
 ## Kulun luominen, muokkaminen ja poistaminen
 Klikkaamalla "Add New expenses" -painiketta pääset kulujen lisäämissivulle. Täytä summa, päivämäärä, tyyppi ja kuvaus. Tallenna napsauttamalla "save"-painiketta, niin uudet kulut näkyvät etusivullasi.
-![](./pics/kayttoohje_addingview.png)
+![](./pics/kayttoohje_addingview.png)  
 Käyttäjä voi muuttaa tai poistaa kulun napsauttaamalla riviä, napsauttaa sitten "Edit selected" tai napsauttaa "delete selected". Sitten siiryytään luominen sivuun, tiedot on jo tallennettu sinne, ja voit muokata suoraan haluamaasi sisältöä.
 ![](./pics/kayttoohje_expensesview.png)

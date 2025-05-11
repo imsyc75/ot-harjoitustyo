@@ -1,7 +1,7 @@
 # Arkkitehtuurikuvaus
 ## Rakenne
 koodin pakkausrakenne on seuraava:
-![Pakkausrakenne](./pics/arkkitehtuuri_pakkaus.png)
+![Pakkausrakenne](./pics/arkkitehtuuri_pakkaus.png)  
 Pakkaus ui sisältää koodin, joka vastaa käyttöliittymästä. Pakkaus services sisältää sovelluslogiikasta vastaavan koodin. Pakkaus repositories sisältää koodin, joka vastaa tietojen pysyväistallennuksesta. Pakkaus entities sisältää luokkia, jotka kuvaavat sovelluksen käsittelemiä tietokohteita.
 
 ## Käyttöliittymä
@@ -78,7 +78,7 @@ CREATE TABLE expenses (
 Kuvaataan muutama sovelluksen päätoiminnallisuuden sekvenssikaaviona.
 
 ### Käyttäjän luominen
-
+Kun rekisteröintinäkymään syötetään käyttäjätunnus ja salasana, joita ei ole vielä käytetty, ja "Submit"-paniketta napsautetaan, sovelluksen hallinta etenee seuraavasti:
 ```mermaid
 sequenceDiagram
   actor User
@@ -104,7 +104,7 @@ sequenceDiagram
 ```
 
 ### Käyttäjän kirjautuminen
-
+Kun syödään käyttäjätunnuksia ja salasanaa kirjautumisnäytön syöttökenttiin ja napsautat "Login"-painiketta, sovelluksen hallinta toimii seuraavasti:
 ```mermaid
 sequenceDiagram
   actor User
@@ -127,9 +127,7 @@ sequenceDiagram
   ```
 
 ### Uuden kulun luominen
-
-Uuden kulun luovan "Add Expense" painikkeen klikkaamisen seurauksena tapahtuva sovelluksen toimintalogiikka sekvenssikaaviona:
-
+Uuden kulun luovan "Save" painikkeen klikkaamisen seurauksena tapahtuva sovelluksen toimintalogiikka sekvenssikaaviona:
 ```mermaid
 sequenceDiagram
   actor User
