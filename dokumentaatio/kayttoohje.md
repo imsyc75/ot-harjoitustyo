@@ -1,6 +1,11 @@
 # Käyttöohje
 
 ## Konfigurointi
+Sovellus käyttää SQLite-tietokantaa käyttäjien ja kulujen tallentamiseen. Haluttaessa tiedoston nimi voidaan määrittää .env-tiedostossa. Tiedostot luodaan automaattisesti data-hakemistoon, jos niitä ei ole olemassa. Tiedostomuoto on seuraava:
+```
+DATABASE_FILENAME=database.sqlite
+```
+
 ## Ohjelman käynnistäminen
 
 1. Asenna riippuvuudet komennolla
@@ -31,7 +36,7 @@ Kirjautumissivulla voidaan siirtyä uuden käyttäjän luontinäyttöön napsaut
 Jos käyttäjän luominen onnistuu, siirrytään kirjautumisnäkymään.
 
 ## Käyttäjän Omasivu
-Kirjautumisen onnistumisen jälkeen, siirrytään käyttäjän omasivulla. Sivun yläreunassa käyttäjät voivat valita kuukauden ja vuoden ja napsauttaa sitten "Search"-painiketta nähdäkseen kyseisen ajanjakson kulut. Oikealla puolella voidaan napsauttaa "Export to CSV" viedäksesi CSV-tiedoston. Kirjaudu ulos napsauttamalla "Log out"-painiketta.
+Kirjautumisen onnistumisen jälkeen, siirrytään käyttäjän omasivulla. Sivun yläreunassa käyttäjät voivat valita kuukauden ja vuoden ja napsauttaa sitten "Search"-painiketta nähdäkseen kyseisen ajanjakson kulut. Kirjaudu ulos napsauttamalla "Log out"-painiketta. Vasemmassa alakulmassa näet kuukausittaiset kokonaiskulusi. "View chart" -painike luo jokaiselle kuukaudelle ympyrädiagrammin, joka näyttää eri kulutusluokkien prosenttiosuuden. "Export CSV" -painikkeella voit luoda CSV-tiedoston jokaiselle kuukaudelle paikalliselle tietokoneellesi.
 ![](./pics/kayttoohje_omasivu.png)
 
 ## Kulun luominen, muokkaminen ja poistaminen
