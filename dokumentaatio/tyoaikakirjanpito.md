@@ -1,5 +1,5 @@
 # Työaikakirjanpito
-Yhteensä 42h
+Yhteensä 58h
 
 viikko2
 | päivä | aika | mitä tein  |
@@ -43,3 +43,13 @@ viikko6
 | 29.4 | 6   | uusi toiminnallisuuden toteutus, testaus, dokumentaation kirjoittaminen |
 | yht   | 10  | | 
 
+viikko7
+| päivä | aika | mitä tein  |
+| :----:|:-----| :-----|
+| 5.5| 0,5   | UI optimointi   |
+| 6.5 | 3.5   | Repository ja Service lisäminen |
+| 7.5 | 2  | Bugikorjaus|
+| 9.5 | 3  | uusi toiminnallisuuden toteutus  + testaus |
+| 10.5 | 2   |Testaus |
+| 11.5 | 5   | dokumentaation kirjoittaminen |
+| yht   | 16  | | 

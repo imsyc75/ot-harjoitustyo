@@ -24,3 +24,8 @@
 - Käyttöliittymän optimointi
 - Lisää yksi unitesti: Testatut virhetapaukset laskun luomisen osalta
 - Muokkausnäkymät täytetään nykyisillä arvoilla, jotta käyttäjän ei tarvitse kirjoittaa kaikkea uudelleen.
+
+## Viikko 7
+- Käyttäjä voi luoda piirakkakaavio kuluista.
+- Lisää Repository ja Service rakentamiseen.
+- Testatuu Repository ja Service koodin toimivuutta. (kattavuu 90%)
